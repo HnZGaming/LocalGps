@@ -25,8 +25,8 @@ namespace HNZ.LocalGps
             var localPlayer = MyAPIGateway.Session.LocalHumanPlayer;
             if (localPlayer == null) return;
 
-            var character = localPlayer?.Character;
-            if (src.Radius > 0 && Vector3D.Distance(character.GetPosition(), src.Position) > src.Radius)
+            var distance = Vector3D.Distance(localPlayer.Character.GetPosition(), src.Position);
+            if (distance > src.Radius && src.Radius > 0)
             {
                 RemoveGps(src.Id);
                 return;
@@ -38,7 +38,7 @@ namespace HNZ.LocalGps
                 return;
             }
 
-            if (src.ExcludedPlayers?.Contains(localPlayer.IdentityId) ?? false)
+            if (src.ExcludedPlayers?.Contains(localPlayer.SteamUserId) ?? false)
             {
                 RemoveGps(src.Id);
                 return;

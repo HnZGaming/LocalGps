@@ -34,7 +34,7 @@ namespace HNZ.LocalGps.Interface
         public int PromoteLevel { get; set; }
 
         [ProtoMember(9, IsRequired = false)]
-        public long[] ExcludedPlayers { get; set; }
+        public ulong[] ExcludedPlayers { get; set; }
 
         public override string ToString()
         {
