@@ -6,7 +6,7 @@ namespace HNZ.LocalGps.Interface
 {
     public class LocalGpsApi
     {
-        public static readonly long ModVersion = "LocalGpsApi 1.0.0".GetHashCode();
+        public static readonly long ModVersion = "LocalGpsApi 1.0.*".GetHashCode();
 
         readonly long _moduleId;
 
