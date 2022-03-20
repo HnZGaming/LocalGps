@@ -23,9 +23,10 @@ namespace HNZ.LocalGps
         public void AddOrUpdateGps(LocalGpsSource src)
         {
             var localPlayer = MyAPIGateway.Session.LocalHumanPlayer;
-            if (localPlayer == null) return;
+            var character = localPlayer?.Character;
+            if (character == null) return;
 
-            var distance = Vector3D.Distance(localPlayer.Character.GetPosition(), src.Position);
+            var distance = Vector3D.Distance(character.GetPosition(), src.Position);
             if (distance > src.Radius && src.Radius > 0)
             {
                 RemoveGps(src.Id);
