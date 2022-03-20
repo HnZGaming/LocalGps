@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using HNZ.LocalGps.Interface;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -27,11 +29,12 @@ namespace HNZ.LocalGps
             }
 
             IMyGps gps;
-            if (!_gps.TryGetValue(src.Id, out gps))
+            if (!_gps.TryGetValue(src.Id, out gps)) // add
             {
                 _gps[src.Id] = gps = MyAPIGateway.Session.GPS.Create(src.Name, src.Description, src.Position, true, false);
                 _gpsFollows[src.Id] = new LocalGpsFollow(gps);
                 MyAPIGateway.Session.GPS.AddLocalGps(gps);
+                PlaySound("HudGPSNotification3");
             }
 
             gps.Name = src.Name;
@@ -60,6 +63,15 @@ namespace HNZ.LocalGps
             {
                 p.Value.Update();
             }
+        }
+
+        static void PlaySound(string cueName)
+        {
+            var character = MyAPIGateway.Session?.LocalHumanPlayer?.Character;
+            if (character == null) return;
+            var emitter = new MyEntity3DSoundEmitter(character as MyEntity);
+            var sound = new MySoundPair(cueName);
+            emitter.PlaySound(sound);
         }
     }
 }
