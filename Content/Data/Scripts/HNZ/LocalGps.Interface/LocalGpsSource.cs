@@ -24,7 +24,7 @@ namespace HNZ.LocalGps.Interface
         public Vector3D Position { get; set; }
 
         [ProtoMember(6)]
-        public double Radius { get; set; } // negative value -> everyone
+        public double Radius { get; set; } // less than 0 inclusive -> everyone
 
         [ProtoMember(7)]
         public long EntityId { get; set; }

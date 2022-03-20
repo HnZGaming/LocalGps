@@ -133,6 +133,7 @@
         <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsApi.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSourceBinary.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSource.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\LocalGps\Config.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\LocalGps\LocalGpsCollection.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\LocalGps\LocalGpsFollow.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\LocalGps\LocalGpsModule.cs" />
@@ -154,7 +155,6 @@
         <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LogConfig.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\Logger.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggerManager.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\Utils\Logging\LoggingLevelConfig.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\MathUtils.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\DictionaryPool.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\Pools\ListPool.cs" />

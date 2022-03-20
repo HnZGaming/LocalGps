@@ -21,8 +21,10 @@ namespace HNZ.LocalGps
 
         public void AddOrUpdateGps(LocalGpsSource src)
         {
-            var character = MyAPIGateway.Session.LocalHumanPlayer.Character;
-            if (src.Radius >= 0 && Vector3D.Distance(character.GetPosition(), src.Position) > src.Radius)
+            var character = MyAPIGateway.Session.LocalHumanPlayer?.Character;
+            if (character == null) return;
+
+            if (src.Radius > 0 && Vector3D.Distance(character.GetPosition(), src.Position) > src.Radius)
             {
                 RemoveGps(src.Id);
                 return;
@@ -69,6 +71,7 @@ namespace HNZ.LocalGps
         {
             var character = MyAPIGateway.Session?.LocalHumanPlayer?.Character;
             if (character == null) return;
+
             var emitter = new MyEntity3DSoundEmitter(character as MyEntity);
             var sound = new MySoundPair(cueName);
             emitter.PlaySound(sound);

@@ -13,7 +13,9 @@ namespace HNZ.LocalGps
 
         readonly ProtobufModule _protobufModule;
         readonly byte _loadId;
+
         readonly Dictionary<long, LocalGpsCollection> _gps;
+        //todo buffer sending multiple data
 
         public LocalGpsModule(ProtobufModule protobufModule, byte loadId)
         {
@@ -84,6 +86,8 @@ namespace HNZ.LocalGps
 
         void AddOrUpdateGps(long moduleId, LocalGpsSource src)
         {
+            Log.Debug($"Add or update: {moduleId}, {src.Id}, \"{src.Name}\"");
+
             LocalGpsCollection c;
             if (!_gps.TryGetValue(moduleId, out c))
             {
@@ -95,6 +99,8 @@ namespace HNZ.LocalGps
 
         void RemoveGps(long moduleId, long gpsId)
         {
+            Log.Debug($"Remove: {moduleId}, {gpsId}");
+
             LocalGpsCollection c;
             if (!_gps.TryGetValue(moduleId, out c))
             {
