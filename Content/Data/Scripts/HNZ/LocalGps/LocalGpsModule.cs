@@ -45,6 +45,8 @@ namespace HNZ.LocalGps
 
         public void SendAddOrUpdateGps(long moduleId, LocalGpsSource src, bool reliable = true, ulong? playerId = null)
         {
+            Log.Debug($"Sending add or update: {moduleId}, {src.Id}, \"{src.Name}\"");
+
             using (var stream = new ByteStream(1024))
             using (var writer = new BinaryWriter(stream))
             {
@@ -55,6 +57,8 @@ namespace HNZ.LocalGps
 
         public void SendRemoveGps(long moduleId, long gpsId, bool reliable = true, ulong? playerId = null)
         {
+            Log.Debug($"Sending remove: {moduleId}, {gpsId}");
+
             using (var stream = new ByteStream(1024))
             using (var writer = new BinaryWriter(stream))
             {
@@ -86,28 +90,27 @@ namespace HNZ.LocalGps
 
         void AddOrUpdateGps(long moduleId, LocalGpsSource src)
         {
-            Log.Debug($"Add or update: {moduleId}, {src.Id}, \"{src.Name}\"");
+            Log.Debug($"Received add or update: {moduleId}, {src.Id}, \"{src.Name}\"");
 
-            LocalGpsCollection c;
-            if (!_gps.TryGetValue(moduleId, out c))
-            {
-                c = _gps[moduleId] = new LocalGpsCollection();
-            }
-
-            c.AddOrUpdateGps(src);
+            GetLocalGpsCollection(moduleId).AddOrUpdateGps(src);
         }
 
         void RemoveGps(long moduleId, long gpsId)
         {
-            Log.Debug($"Remove: {moduleId}, {gpsId}");
+            Log.Debug($"Received remove: {moduleId}, {gpsId}");
 
+            GetLocalGpsCollection(moduleId).RemoveGps(gpsId);
+        }
+
+        LocalGpsCollection GetLocalGpsCollection(long moduleId)
+        {
             LocalGpsCollection c;
             if (!_gps.TryGetValue(moduleId, out c))
             {
                 c = _gps[moduleId] = new LocalGpsCollection();
             }
 
-            c.RemoveGps(gpsId);
+            return c;
         }
     }
 }
