@@ -1,5 +1,6 @@
 ﻿using System;
 using ProtoBuf;
+using VRage.Game.ModAPI;
 using VRageMath;
 
 namespace HNZ.LocalGps.Interface
@@ -23,11 +24,17 @@ namespace HNZ.LocalGps.Interface
         [ProtoMember(5)]
         public Vector3D Position { get; set; }
 
-        [ProtoMember(6)]
+        [ProtoMember(6, IsRequired = false)]
         public double Radius { get; set; } // less than 0 inclusive -> everyone
 
-        [ProtoMember(7)]
+        [ProtoMember(7, IsRequired = false)]
         public long EntityId { get; set; }
+
+        [ProtoMember(8, IsRequired = false)]
+        public int PromoteLevel { get; set; }
+
+        [ProtoMember(9, IsRequired = false)]
+        public long[] ExcludedPlayers { get; set; }
 
         public override string ToString()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using HNZ.LocalGps.Interface;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
@@ -21,10 +22,23 @@ namespace HNZ.LocalGps
 
         public void AddOrUpdateGps(LocalGpsSource src)
         {
-            var character = MyAPIGateway.Session.LocalHumanPlayer?.Character;
-            if (character == null) return;
+            var localPlayer = MyAPIGateway.Session.LocalHumanPlayer;
+            if (localPlayer == null) return;
 
+            var character = localPlayer?.Character;
             if (src.Radius > 0 && Vector3D.Distance(character.GetPosition(), src.Position) > src.Radius)
+            {
+                RemoveGps(src.Id);
+                return;
+            }
+
+            if (localPlayer.PromoteLevel < (MyPromoteLevel)src.PromoteLevel)
+            {
+                RemoveGps(src.Id);
+                return;
+            }
+
+            if (src.ExcludedPlayers?.Contains(localPlayer.IdentityId) ?? false)
             {
                 RemoveGps(src.Id);
                 return;
