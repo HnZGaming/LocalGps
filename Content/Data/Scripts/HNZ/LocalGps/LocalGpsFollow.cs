@@ -12,6 +12,7 @@ namespace HNZ.LocalGps
         Vector3D _velocity;
         Vector3D _targetPosition;
         long _entityId;
+        bool _hadPosition;
 
         public LocalGpsFollow(IMyGps gps)
         {
@@ -30,10 +31,19 @@ namespace HNZ.LocalGps
 
         public void Update()
         {
+            // use the entity's position
             MyEntity entity;
             if (_entityId != 0 && MyEntities.TryGetEntityById(_entityId, out entity))
             {
                 _gps.Coords = entity.PositionComp.GetPosition();
+                return;
+            }
+
+            // jump to the first position
+            if (!_hadPosition)
+            {
+                _gps.Coords = _targetPosition;
+                _hadPosition = true;
                 return;
             }
 
