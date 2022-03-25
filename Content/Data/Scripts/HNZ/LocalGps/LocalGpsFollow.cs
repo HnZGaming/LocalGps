@@ -12,7 +12,6 @@ namespace HNZ.LocalGps
         Vector3D _velocity;
         Vector3D _targetPosition;
         long _entityId;
-        bool _hadPosition;
 
         public LocalGpsFollow(IMyGps gps)
         {
@@ -39,11 +38,9 @@ namespace HNZ.LocalGps
                 return;
             }
 
-            // jump to the first position
-            if (!_hadPosition)
+            if (_gps.Coords == Vector3.Zero)
             {
                 _gps.Coords = _targetPosition;
-                _hadPosition = true;
                 return;
             }
 
