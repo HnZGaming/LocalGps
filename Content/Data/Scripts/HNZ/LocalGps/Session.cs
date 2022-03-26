@@ -93,6 +93,13 @@ namespace HNZ.LocalGps
             }
         }
 
+        bool ICommandListener.ProcessCommandOnClient(Command command)
+        {
+            //todo filter
+            _commands.GetValueOrDefault(command.Header, null)?.Invoke(command);
+            return false;
+        }
+
         void ICommandListener.ProcessCommandOnServer(Command command)
         {
             _commands.GetValueOrDefault(command.Header, null)?.Invoke(command);
