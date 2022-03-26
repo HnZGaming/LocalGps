@@ -51,7 +51,7 @@ namespace HNZ.LocalGps
             _configFile = new ContentFile<Config>("Config.cfg", Config.CreateDefault());
             _configFile.ReadOrCreateFile();
             Config.Instance = _configFile.Content;
-            LoggerManager.SetLogConfig(Config.Instance.LogConfigs);
+            LoggerManager.SetConfigs(Config.Instance.LogConfigs);
         }
 
         protected override void UnloadData()
