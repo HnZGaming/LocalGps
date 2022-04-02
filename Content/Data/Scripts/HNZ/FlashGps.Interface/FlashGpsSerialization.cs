@@ -7,6 +7,10 @@ namespace HNZ.FlashGps.Interface
     {
         public static void WriteAddOrUpdateFlashGps(this BinaryWriter writer, long moduleId, FlashGpsSource src)
         {
+            // optimize network load
+            src.ExcludedPlayers = null;
+            src.TargetPlayers = null;
+
             writer.Write(true);
             writer.Write(moduleId);
             writer.WriteProtobuf(src);

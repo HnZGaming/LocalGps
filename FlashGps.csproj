@@ -137,6 +137,7 @@
         <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ClientGpsCollection.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ClientGps.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ClientGpsFollow.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ServerGpsFilter.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\FlashGps\Network.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\FlashGps\Session.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\AddRemoveObserver.cs" />

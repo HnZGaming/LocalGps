@@ -15,7 +15,7 @@ namespace HNZ.FlashGps.Interface
             _moduleId = moduleId;
         }
 
-        public void AddOrUpdateFlashGps(FlashGpsSource src)
+        public void AddOrUpdate(FlashGpsSource src)
         {
             using (var stream = new ByteStream(1024))
             using (var writer = new BinaryWriter(stream))
@@ -25,7 +25,7 @@ namespace HNZ.FlashGps.Interface
             }
         }
 
-        public void RemoveFlashGps(long gpsId)
+        public void Remove(long gpsId)
         {
             using (var stream = new ByteStream(1024))
             using (var writer = new BinaryWriter(stream))
