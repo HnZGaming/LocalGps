@@ -6,7 +6,7 @@ namespace HNZ.FlashGps.Interface
 {
     public class FlashGpsApi
     {
-        public static readonly long ModVersion = "FlashGpsApi 1.0.*".GetHashCode();
+        public static readonly long ModVersion = "FlashGpsApi 1.1.*".GetHashCode();
 
         readonly long _moduleId;
 
