@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 using HNZ.Utils.Logging;
 using VRage.Utils;
 
-namespace HNZ.LocalGps
+namespace HNZ.FlashGps
 {
     [Serializable]
     public sealed class Config

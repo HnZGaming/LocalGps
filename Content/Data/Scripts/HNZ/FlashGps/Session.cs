@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using HNZ.LocalGps.Interface;
+using HNZ.FlashGps.Interface;
 using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
@@ -10,7 +10,7 @@ using VRage;
 using VRage.Game.Components;
 using VRageMath;
 
-namespace HNZ.LocalGps
+namespace HNZ.FlashGps
 {
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation)]
     public class Session : MySessionComponentBase, ICommandListener
@@ -21,27 +21,27 @@ namespace HNZ.LocalGps
         Dictionary<string, Action<Command>> _commands;
         ProtobufModule _protobufModule;
         CommandModule _commandModule;
-        LocalGpsModule _localGpsModule;
+        Network _network;
 
         public override void LoadData()
         {
-            LoggerManager.SetPrefix(nameof(LocalGps));
+            LoggerManager.SetPrefix(nameof(FlashGps));
 
             _commands = new Dictionary<string, Action<Command>>
             {
                 { "reload", Command_Reload },
             };
 
-            _protobufModule = new ProtobufModule((ushort)nameof(LocalGps).GetHashCode());
+            _protobufModule = new ProtobufModule((ushort)nameof(FlashGps).GetHashCode());
             _protobufModule.Initialize();
 
             _commandModule = new CommandModule(_protobufModule, 1, "lg", this);
             _commandModule.Initialize();
 
-            _localGpsModule = new LocalGpsModule(_protobufModule, 2);
-            _localGpsModule.Initialize();
+            _network = new Network(_protobufModule, 2);
+            _network.Initialize();
 
-            MyAPIGateway.Utilities.RegisterMessageHandler(LocalGpsApi.ModVersion, OnModMessageReceived);
+            MyAPIGateway.Utilities.RegisterMessageHandler(FlashGpsApi.ModVersion, OnModMessageReceived);
 
             ReloadConfig();
         }
@@ -58,15 +58,15 @@ namespace HNZ.LocalGps
         {
             _protobufModule?.Close();
             _commandModule?.Close();
-            _localGpsModule?.Close();
-            MyAPIGateway.Utilities.UnregisterMessageHandler(LocalGpsApi.ModVersion, OnModMessageReceived);
+            _network?.Close();
+            MyAPIGateway.Utilities.UnregisterMessageHandler(FlashGpsApi.ModVersion, OnModMessageReceived);
         }
 
         public override void UpdateBeforeSimulation()
         {
             _protobufModule.Update();
             _commandModule.Update();
-            _localGpsModule.Update();
+            _network.Update();
         }
 
         void OnModMessageReceived(object message)
@@ -79,16 +79,16 @@ namespace HNZ.LocalGps
             {
                 bool isAddOrUpdate;
                 long moduleId;
-                LocalGpsSource src;
+                FlashGpsSource src;
                 long gpsId;
-                binaryReader.ReadLocalGps(out isAddOrUpdate, out moduleId, out src, out gpsId);
+                binaryReader.ReadFlashGps(out isAddOrUpdate, out moduleId, out src, out gpsId);
                 if (isAddOrUpdate)
                 {
-                    _localGpsModule.SendAddOrUpdateGps(moduleId, src);
+                    _network.SendAddOrUpdateGps(moduleId, src);
                 }
                 else
                 {
-                    _localGpsModule.SendRemoveGps(moduleId, gpsId);
+                    _network.SendRemoveGps(moduleId, gpsId);
                 }
             }
         }

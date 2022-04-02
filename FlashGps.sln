@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalGps", "LocalGps.csproj", "{00A6B197-0E0C-4917-859A-1CFBD7DFE12A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlashGps", "FlashGps.csproj", "{00A6B197-0E0C-4917-859A-1CFBD7DFE12A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

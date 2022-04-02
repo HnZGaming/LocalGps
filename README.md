@@ -1,41 +1,37 @@
-# LocalGps
+# Flash GPS
 
-Passive mod to allow server mods, scripts and Torch plugins to populate local GPSs in client games, 
-in such way that it's more flexible than the vanilla system depending on the use case.
+API to help you make a custom GPS system in multiplayer.
+
+* Create and manage GPS entities based on your own custom ID model, not "hash".
+* Save GPS entities in your own custom persistence model, not the world save.
+
+This API will open up interesting use cases of GPS as a world-space HUD element.
 
 ## Background
 
-The vanilla GPS system had following issues:
+Vanilla GPS API comes with its own ID/persistency framework which is painful to work with in multiplayer:
 
-- They identify GPSs by "hash" which is not reliable in some cases because players can easily manipulate it.
-- Local GPSs fail to show up in the client if the tied entity is not replicated.
-- There's no option to make the "ding" sound for local GPSs.
+- GPS is identified by "hash" which is easily disintegrated by player action.
+- "Local GPS" is not thoroughly implemented around entity replication over network.
+- The way GPS entities are carried around in the server-side code is just messed up.
 
-These "minor" inconvenience added up in many ocassions and I had to make my own purpose-built system.
-
-## Use Cases
-
-This system focuses on managing "local" GPSs, which are created by the server but won't be saved in the server.
-For most event-based GPSs I find it easy to use local GPSs in order to start fresh every session.
-This mod is most suited for use cases where the server will constantly update GPSs with different texts, colors etc 
-while managing their lifespan based on the presence of entities in the world.
-
+I've had enough of it and started making my own API.
+GPS is just a world-space HUD element and should be the easiest thing to control.
 
 ## System
 
-GPSs are populated in the client game using data sent by the server. GPSs will be identified and managed via an ID number (not "hash").
-Server can send add/update/remove events using the ID. GPSs can either show up at specific positions or follow specific entities.
-For entities that are not replicated, the system will show GPSs at their last known position in the server and move them in an interpolation.
-GPSs can make the "ding" sound on creation.
+API is push-based and the server is responsible for managing the display condition of all GPS entities.
+Client will simply add/update/remove GPS entities on the HUD based on their ID and timer.
+This model makes it easy to control the procedural aspect of GPS text/position from server scripts.
 
 ## How to Use
 
-- Add the mod in your world.
-- Copy files in `HNZ.LocalGps.Interface` to your mod/plugin project. 
-- For mods, give them a proper namespace.
-- Instantiate `LocalGpsApi` and start sending events.
+API is available for mods and Torch plugins.
+
+- Add the mod in your world (for Torch, patch the session loader to force-add the mod).
+- Copy files to your project from `HNZ.FlashGps.Interface` directory (for mods, change the namespace accordingly). 
+- Instantiate `FlashGpsApi` and start sending GPS entities to clients.
 
 ## Version Control
 
-Do NOT edit `LocalGpsApi.ModVersion`. If `ModVersion` is different in the receiving end, events will be ignored.
-For every "destructive" update, I'll upload a new mod on Steam workshop with a new `ModVersion`, rather than updating or deleting the previous mod.
+Do NOT edit `FlashGpsApi.ModVersion`. For every version (aka destructive changes), new mod will be uploaded on Steam workshop with new `ModVersion`.

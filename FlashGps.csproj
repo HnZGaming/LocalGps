@@ -130,14 +130,15 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsApi.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSourceBinary.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps.Interface\LocalGpsSource.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps\Config.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps\LocalGpsCollection.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps\LocalGpsFollow.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps\LocalGpsModule.cs" />
-        <Compile Include="Content\Data\Scripts\HNZ\LocalGps\Session.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsApi.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSerialization.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps.Interface\FlashGpsSource.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\Config.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ClientGpsCollection.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ClientGps.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\ClientGpsFollow.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\Network.cs" />
+        <Compile Include="Content\Data\Scripts\HNZ\FlashGps\Session.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\AddRemoveObserver.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\BoundaryObserver.cs" />
         <Compile Include="Content\Data\Scripts\HNZ\Utils\CharacterToPlayerLookup.cs" />

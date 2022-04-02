@@ -4,16 +4,16 @@ using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace HNZ.LocalGps
+namespace HNZ.FlashGps
 {
-    public sealed class LocalGpsFollow
+    public sealed class ClientGpsFollow
     {
         readonly IMyGps _gps;
         Vector3D _velocity;
         Vector3D _targetPosition;
         long _entityId;
 
-        public LocalGpsFollow(IMyGps gps)
+        public ClientGpsFollow(IMyGps gps)
         {
             _gps = gps;
         }
