@@ -1,1 +1,1 @@
-SEWorkshopTool push --mods "Flash Gps"
+SEWorkshopTool push --mods "Flash GPS"

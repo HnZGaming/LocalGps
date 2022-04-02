@@ -1,4 +1,5 @@
 using HNZ.Utils;
+using HNZ.Utils.Logging;
 using Sandbox.Game.Entities;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -8,6 +9,8 @@ namespace HNZ.FlashGps
 {
     public sealed class ClientGpsFollow
     {
+        static readonly Logger Log = LoggerManager.Create(nameof(ClientGpsFollow));
+
         readonly IMyGps _gps;
         Vector3D _velocity;
         Vector3D _targetPosition;
