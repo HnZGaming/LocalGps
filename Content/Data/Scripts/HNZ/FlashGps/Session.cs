@@ -35,7 +35,7 @@ namespace HNZ.FlashGps
             _protobufModule = new ProtobufModule((ushort)nameof(FlashGps).GetHashCode());
             _protobufModule.Initialize();
 
-            _commandModule = new CommandModule(_protobufModule, 1, "lg", this);
+            _commandModule = new CommandModule(_protobufModule, 1, "fg", this);
             _commandModule.Initialize();
 
             _network = new Network(_protobufModule, 2);
@@ -48,7 +48,7 @@ namespace HNZ.FlashGps
 
         void ReloadConfig()
         {
-            _configFile = new ContentFile<Config>("Config.cfg", Config.CreateDefault());
+            _configFile = new ContentFile<Config>("FlashGps.cfg", Config.CreateDefault());
             _configFile.ReadOrCreateFile();
             Config.Instance = _configFile.Content;
             LoggerManager.SetConfigs(Config.Instance.LogConfigs);
