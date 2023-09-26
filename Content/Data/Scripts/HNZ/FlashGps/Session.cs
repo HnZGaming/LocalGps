@@ -95,6 +95,7 @@ namespace HNZ.FlashGps
 
         bool ICommandListener.ProcessCommandOnClient(Command command)
         {
+            //todo test admin
             //todo filter
             _commands.GetValueOrDefault(command.Header, null)?.Invoke(command);
             return false;

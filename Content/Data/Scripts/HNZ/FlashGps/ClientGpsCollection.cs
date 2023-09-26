@@ -38,7 +38,11 @@ namespace HNZ.FlashGps
                 var gps = MyAPIGateway.Session.GPS.Create($"{src.Id}", src.Description, src.Position, true, false);
 
                 MyAPIGateway.Session.GPS.AddLocalGps(gps);
-                GameUtils.PlaySound("HudGPSNotification3");
+
+                if (!src.SuppressSound)
+                {
+                    GameUtils.PlaySound("HudGPSNotification3");
+                }
 
                 _gpsEntries[src.Id] = gpsEntry = new ClientGps
                 {
