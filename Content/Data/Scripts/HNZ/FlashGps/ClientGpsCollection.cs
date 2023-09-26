@@ -35,9 +35,14 @@ namespace HNZ.FlashGps
             ClientGps gpsEntry;
             if (!_gpsEntries.TryGetValue(src.Id, out gpsEntry)) // add
             {
-                var gps = MyAPIGateway.Session.GPS.Create(src.Name, src.Description, src.Position, true, false);
+                var gps = MyAPIGateway.Session.GPS.Create($"{src.Id}", src.Description, src.Position, true, false);
+
                 MyAPIGateway.Session.GPS.AddLocalGps(gps);
-                GameUtils.PlaySound("HudGPSNotification3");
+
+                if (!src.SuppressSound)
+                {
+                    GameUtils.PlaySound("HudGPSNotification3");
+                }
 
                 _gpsEntries[src.Id] = gpsEntry = new ClientGps
                 {
@@ -79,10 +84,10 @@ namespace HNZ.FlashGps
             foreach (var p in gpsEntries)
             {
                 var gpsEntry = p.Value;
-                
+
                 gpsEntry.Follow.Update();
 
-                Log.Debug($"{gpsEntry.DecayTime} < {DateTime.UtcNow}");
+                //Log.Debug($"{gpsEntry.DecayTime} < {DateTime.UtcNow}");
                 if (gpsEntry.DecayTime < DateTime.UtcNow)
                 {
                     Log.Debug("removing for decay");
