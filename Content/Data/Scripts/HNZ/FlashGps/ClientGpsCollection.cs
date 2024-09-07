@@ -20,7 +20,7 @@ namespace HNZ.FlashGps
             _gpsEntries = new Dictionary<long, ClientGps>();
         }
 
-        public void AddOrUpdateGps(FlashGpsSource src)
+        public void UpsertGps(FlashGpsSource src)
         {
             var localPlayer = MyAPIGateway.Session.LocalHumanPlayer;
             var character = localPlayer?.Character;

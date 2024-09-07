@@ -77,14 +77,14 @@ namespace HNZ.FlashGps
             using (var stream = new ByteStream(load, load.Length))
             using (var binaryReader = new BinaryReader(stream))
             {
-                bool isAddOrUpdate;
+                bool isUpsert;
                 long moduleId;
                 FlashGpsSource src;
                 long gpsId;
-                binaryReader.ReadFlashGps(out isAddOrUpdate, out moduleId, out src, out gpsId);
-                if (isAddOrUpdate)
+                binaryReader.ReadFlashGps(out isUpsert, out moduleId, out src, out gpsId);
+                if (isUpsert)
                 {
-                    _network.SendAddOrUpdateGps(moduleId, src);
+                    _network.SendUpsertGps(moduleId, src);
                 }
                 else
                 {
