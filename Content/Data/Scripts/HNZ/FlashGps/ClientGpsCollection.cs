@@ -78,7 +78,7 @@ namespace HNZ.FlashGps
 
         public void Update()
         {
-            var gpsEntries = ListPool<KeyValuePair<long, ClientGps>>.Create();
+            var gpsEntries = ListPool<KeyValuePair<long, ClientGps>>.Get();
             gpsEntries.AddRange(_gpsEntries);
 
             foreach (var p in gpsEntries)
