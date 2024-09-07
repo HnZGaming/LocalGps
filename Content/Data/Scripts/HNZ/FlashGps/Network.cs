@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using HNZ.FlashGps.Interface;
+using HNZ.Utils;
 using HNZ.Utils.Communications;
 using HNZ.Utils.Logging;
 using HNZ.Utils.Pools;
@@ -67,7 +68,19 @@ namespace HNZ.FlashGps
             }
 
             var playerIds = SetPool<ulong>.Create();
-            _serverGpsFilter.GetReceivingPlayerIds(src, playerIds);
+
+            // single player mode
+            if (MyAPIGateway.Session.IsServer && !MyAPIGateway.Utilities.IsDedicated)
+            {
+                Log.Debug("single player mode");
+                playerIds.Add(MyAPIGateway.Session.Player.SteamUserId);
+            }
+            else
+            {
+                _serverGpsFilter.GetReceivingPlayerIds(src, playerIds);
+            }
+
+            Log.Debug($"receiving: {playerIds.SeqToString()}");
 
             using (var stream = new ByteStream(1024))
             using (var writer = new BinaryWriter(stream))

@@ -32,8 +32,9 @@ namespace HNZ.FlashGps
                 return;
             }
 
+            // insert
             ClientGps gpsEntry;
-            if (!_gpsEntries.TryGetValue(src.Id, out gpsEntry)) // add
+            if (!_gpsEntries.TryGetValue(src.Id, out gpsEntry))
             {
                 var gps = MyAPIGateway.Session.GPS.Create($"{src.Id}", src.Description, src.Position, true, false);
 
@@ -50,9 +51,10 @@ namespace HNZ.FlashGps
                     Follow = new ClientGpsFollow(gps),
                 };
 
-                Log.Debug($"added; id: {src.Id}, name: {src.Name}, pos: {src.Position}, radius: {src.Radius}");
+                Log.Debug($"added; id: {src.Id}, name: {src.Name}, pos: {src.Position}, radius: {src.Radius}, jingle: {!src.SuppressSound}");
             }
 
+            // update
             gpsEntry.Gps.Name = src.Name ?? "";
             gpsEntry.Gps.Description = src.Description ?? "";
             gpsEntry.Gps.GPSColor = src.Color;
